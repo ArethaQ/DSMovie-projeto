@@ -1,9 +1,13 @@
 package com.devsuperior.dsmovie.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +21,10 @@ public class Movie {
 	private Double score;
 	private Integer count;
 	private String image;
+	
+	//criar durante a criação do ScoreService e dps lá embaixo puxar o get dele (nao esquecer de colocar a anotação OneToMany
+	@OneToMany(mappedBy = "id.movie")
+	private Set<Score> scores = new HashSet<>();
 	
 	//criando construtor vazio para poder instanciar um movie sem passar valor pra ele
 	public Movie() {
@@ -71,5 +79,13 @@ public class Movie {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	//puxando o get dele
+	public Set<Score> getScores() {
+		return scores;
+	}
+	
+	
+	
 	
 }
